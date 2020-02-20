@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RestEngineByNrules.Dto;
 
 namespace RestEngineByNrules
@@ -41,6 +42,23 @@ namespace RestEngineByNrules
             var name= request.CheckingPerson;
             request.CheckingStatus = RequestStatus.Reject;
             Console.WriteLine($"{name} reject request:{request.key}");
+
+            return request;
+        }
+
+        public AskForRest GetPorxyAlreadyRestThatDay(string name, string proxy)
+        {
+            var request = new AskForRest(
+                name,
+                proxy,
+                new DateTime(2020, 2, 10),
+                new DateTime(2020, 2, 13));
+            //SendRequest
+            request.CheckingStatus = RequestStatus.Finish;
+            request.CheckList=new Queue<string>();
+
+            Console.WriteLine($"{request.Name}新增了一張假單 代理人{request.Proxy}" +
+                              $" 時間{request.StartTime}到{request.EndTime}");
 
             return request;
         }
