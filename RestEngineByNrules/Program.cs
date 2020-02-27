@@ -10,10 +10,13 @@ namespace RestEngineByNrules
         static void Main(string[] args)
         {
             //正常請假流程
-            NoramlSample();
+            //NoramlSample();
 
             //代理人衝突的測試
             //ProxyErrorSample();
+
+            //測試補修不足的情況
+            RestReaminingSample();
         }
 
         private static void NoramlSample()
@@ -99,6 +102,36 @@ namespace RestEngineByNrules
             request.Proxy = "遠松";
             session.Update(request);
             session.Fire();
+        }
+
+        private static void RestReaminingSample()
+        {
+            //Load rules
+            var repository = new RuleRepository();
+            repository.Load(x => x.From(typeof(NoticeNewRequestRule).Assembly));
+
+            //Compile rules
+            var factory = repository.Compile();
+
+            //Create a working session
+            var session = factory.CreateSession();
+            //Fake Web Action
+            var fakeAction = new FakeAction();
+
+            //設定補修只有2天
+            var person = fakeAction.GetFakePerson("皓之", 2);
+            session.Insert(person);
+            session.Fire();
+            //請假
+            var request = fakeAction.SendAskForRestRequest();
+
+            session.Insert(request);
+            session.Fire();
+
+
+            
+
+            
         }
     }
 }

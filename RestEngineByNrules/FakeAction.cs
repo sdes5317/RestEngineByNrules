@@ -62,5 +62,14 @@ namespace RestEngineByNrules
 
             return request;
         }
+
+        public Person GetFakePerson(string name,int restRemaining)
+        {
+            return new Person()
+            {
+                Name = name,
+                RestRemaining = restRemaining
+            };
+        }
     }
 }

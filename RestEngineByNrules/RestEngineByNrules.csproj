@@ -53,9 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dto\AskForRest.cs" />
+    <Compile Include="Dto\Person.cs" />
     <Compile Include="FakeAction.cs" />
     <Compile Include="MessageService.cs" />
     <Compile Include="MyRules2\CheckProxyRule.cs" />
+    <Compile Include="MyRules3\CheckRestRemainingRule.cs" />
     <Compile Include="MyRules\IsFinishRule.cs" />
     <Compile Include="MyRules\PassToSendRule.cs" />
     <Compile Include="MyRules\RejectToSendRule.cs" />
